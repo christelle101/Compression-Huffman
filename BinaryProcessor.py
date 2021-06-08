@@ -30,7 +30,7 @@ class BinaryProcess:
     def writeBinCodes(self, alphabet, binTable, fileName):
         with open(fileName[:4]+'_BinCodes.txt','a') as f:
             for i in alphabet:
-                f.write("The binary code of " + i + "is : " + str(binTable[i]) + '\n')
+                f.write("The binary code of " + i + " is : " + str(binTable[i]) + '\n')
             f.close()
 
 
