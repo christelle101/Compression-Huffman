@@ -43,5 +43,4 @@ Make sure that your data (the txt file to be compressed) is stored in the same f
 Then, open the HuffmanEncoding.py file, run and follow the instructions.
 
 ## Results to be provided
-
-The project resources contain three texts. For each one (name.txt), the program will have to generate a compressed text file (name_comp.bin) and a description file of the alphabet used with the character frequencies (name_freq.txt).
+The program will have to generate a compressed text file (name_comp.bin) and a description file of the alphabet used with the character frequencies (name_freq.txt).
