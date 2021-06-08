@@ -4,11 +4,9 @@
 
 ### General description
 
-Huffman coding(also known as Huffman Encoding) is a statistical method of compressing data. Its principle is to replace a character (or symbol) by a series of bits of variable length. The underlying idea is to encode what is frequent on few bits and what is rare on longer bit sequences. It allows lossless compression, that is, as string of bits stricly identical to the original is restored by decompression. However, it requires that the frequencies of appearance of the various symbols to be coded are known(or estimated). </br>
+Huffman coding replaces a character by a series of bits of variable length. The underlying idea is to encode what is frequent on few bits and what is rare on longer bit sequences. It requires that the frequencies of appearance of the various symbols to be coded are known(or estimated). </br>
 
 This project solely focuses on the semi-adaptative version of the algorithm, in which the text to be encoded is read in its entirety in order to build the alphabet and determine the frequencies. </br>
-
-This program is divided in five major steps :
 
 ### Step 1 : Determination of the alphabet and character frequencies
 
@@ -24,12 +22,20 @@ The code for each character is obtained by a deep scan of the tree. Each charact
 
 ### Step 4 : Determination of the compression ratio
 
-The compression ratio measures the alorithm's performance relative to the text to compress. It is defined as the gain in volume compared to the initial volume of data (in number of bytes).
+The compression ratio measures the alorithm's performance relative to the text to compress.
 
 ### Step 5 : Determination of the average number of storage bits for a character
 
 **Here is an example of an application of Huffman's algorithm:**
 ![image](https://www.cs.princeton.edu/courses/archive/fall08/cos226/assignments/huffman.png)
+
+## How to use the project
+
+Clone the repository using the following command :
+> $ git clone https://github.com/christelle101/Compression-Huffman.git
+
+Make sure that your data (the txt file to be compressed) is stored in the same folder as the .py files.
+Then, open the HuffmanEncoding.py file, run and follow the instructions.
 
 ## Results to be provided
 
