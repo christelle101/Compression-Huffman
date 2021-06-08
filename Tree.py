@@ -26,6 +26,21 @@ class HTree:
     def setFrequency(self, frequency):
         self.frequency = frequency
 
+    #redefines the > operator
+    def __gt__(self, other):
+        if isinstance(other, HTree):
+            if self.frequency > other.frequency:
+                return True
+            elif self.frequency <= other.frequency:
+                return False
+
+    #redefines the < operator
+    def __lt__(self, other):
+       if isinstance(other, HTree):
+           if self.frequency < other.frequency:
+               return True
+           elif self.frequency >= other.frequency:
+               return False
     #functions
     def is_leaf(self): #returns a boolean which indicates whether the node is a leaf or not
         return self.left_child is None and self.right_child is None
@@ -56,3 +71,11 @@ class HTree:
                 self.getRightChild().browse(path + '1')
         return nodes
 
+    #prints the binary tree
+    def drawTree(self):
+        print("Tree : -", self.label)
+        self.getChildren()
+        if not self.getLeftChild() is None:
+            self.left_child.drawTree()
+        if not self.getRightChild() is None:
+            self.right_child.drawTree()
