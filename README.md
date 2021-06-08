@@ -29,10 +29,15 @@ The compression ratio measures the alorithm's performance relative to the text t
 **Here is an example of an application of Huffman's algorithm:**
 ![image](https://www.cs.princeton.edu/courses/archive/fall08/cos226/assignments/huffman.png)
 
+## Made with
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Python](https://www.python.org/)
+
 ## How to use the project
 
 Clone the repository using the following command :
-> $ git clone https://github.com/christelle101/Compression-Huffman.git
+> $ git clone <https://github.com/christelle101/Compression-Huffman.git>
 
 Make sure that your data (the txt file to be compressed) is stored in the same folder as the .py files.
 Then, open the HuffmanEncoding.py file, run and follow the instructions.
