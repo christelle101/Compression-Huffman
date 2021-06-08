@@ -49,7 +49,7 @@ class FileProcess:
 
     #sorts the newly created dictionary by frequency, then by ASCII code
     def freqThenASCII_sort(self, dic):
-        return sorted(dic.items, key = lambda x: (x[1],x[0]))
+        return sorted(dic.items(), key = lambda x: (x[1],x[0]))
 
     #creates a new txt file that contains each caracter and its frequency
     def writeFreqInFile(self, caracter, freq, fileName):
