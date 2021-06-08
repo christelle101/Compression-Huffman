@@ -28,7 +28,7 @@ class Encoding:
     frequenciesList = []
     alphabetList = []
 
-    fileProcessing.writeFreqInFile("The alphabet size is : " + str(alphabetSize), None, fileName)
+    fileProcessing.writeFreqInFile("\n The alphabet size is :    " + " " + str(alphabetSize), None, fileName)
     for pair in freqASCIIdic:
         fileProcessing.writeFreqInFile(pair[0], pair[1], fileName)
         frequenciesList.append(pair[1])
@@ -76,5 +76,5 @@ class Encoding:
         Total = Total + len(binTable[alphabetList[i]])*frequenciesList[i]
     
     avgBits = round(Total/sum(frequenciesList), 2)
-    print("\n The average number of storage bits for one file caracter " + fileName + " is : " + str(avgBits))
+    print("\n The average number of storage bits for one file caracter " + fileName + " " + " is : " + " " + str(avgBits))
 
