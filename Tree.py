@@ -42,8 +42,6 @@ class HTree:
            elif self.frequency >= other.frequency:
                return False
     #functions
-    def is_leaf(self): #returns a boolean which indicates whether the node is a leaf or not
-        return self.left_child is None and self.right_child is None
 
     #returns the list of a node's children
     def getChildren(self):
