@@ -1,4 +1,5 @@
-#from FileProcessor import FileProcess
+""" Classe qui gère l'arbre binaire de Huffman.
+"""
 class HTree:
 
     """Constructeur de la classe HTree.
@@ -19,32 +20,31 @@ class HTree:
     """ Getters et setters.
     Fonctions qui permettent la modification et l'accession de certains attributs de l'objet.
     """
-    #setters and getters
 
     """Retourne la fréquence d'apparition.
     """
-    def getFrequency(self):
+    def get_frequency(self):
         return self.frequency
 
     """ Retourne le fils gauche.
     """
-    def getLeftChild(self):
+    def get_left_child(self):
         return self.left_child
 
     """ Retourne le fils droit.
     """
-    def getRightChild(self):
+    def get_right_child(self):
         return self.right_child
 
     """ Retourne le label.
     """
-    def getLabel(self):
+    def get_label(self):
         return self.label
 
     """ Permet de modifier la valeur de l'élément fréquence.
     [UPDATE] : inutile car on n'aura jamais besoin de modifier la fréquence.
     """
-    def setFrequency(self, frequency):
+    def set_frequency(self, frequency):
         self.frequency = frequency
 
     """ Permet de redéfinir le champ d'action de l'opérateur >.
@@ -52,7 +52,6 @@ class HTree:
     -   isinstance() : retourne vrai si l'objet spécifié est de type spécifié.
     Dans ce cas, elle retourne True si other est de type HTree.
     """
-    #redefines the > operator
     def __gt__(self, other):
         if isinstance(other, HTree):
             if self.frequency > other.frequency:
@@ -65,7 +64,6 @@ class HTree:
     -   isinstance() : retourne vrai si l'objet spécifié est de type spécifié.
     Dans ce cas, elle retourne True si other est de type HTree.
     """
-    #redefines the < operator
     def __lt__(self, other):
        if isinstance(other, HTree):
            if self.frequency < other.frequency:
@@ -77,41 +75,37 @@ class HTree:
     Fonctions utilisées :
     -   append() : ajoute un élément à la fin de la liste children
     """
-    #returns the list of a node's children
-    def getChildren(self):
+    def get_children(self):
         children = []
-        if self.right_child != None :
+        if self.right_child is not None :
             children.append(self.right_child)
-        if self.left_child != None :
+        if self.left_child is not None :
             children.append(self.left_child)
         return children
 
     """ Gère le parcours en profondeur de l'arbre binaire de Huffman.
     """
-    #allows the user to browse the binary tree
     def browse(self, path = None, nodes={}):
-        #returns the dictionary that contains the labels and their associated binary code (called path)
-        if self.getLeftChild() is None and self.getRightChild() is None:
+        if self.get_left_child() is None and self.get_right_child() is None:
             nodes[self.label] = path
-        if not self.getLeftChild() is None:
+        if not self.get_left_child() is None:
             if path is None:
-                self.getLeftChild().browse('0')
+                self.get_left_child().browse('0')
             else:
-                self.getLeftChild().browse(path + '0')
-        if not self.getRightChild() is None:
+                self.get_left_child().browse(path + '0')
+        if not self.get_right_child() is None:
             if path is None:
-                self.getRightChild().browse('1')
+                self.get_right_child().browse('1')
             else:
-                self.getRightChild().browse(path + '1')
+                self.get_right_child().browse(path + '1')
         return nodes
 
     """ Permet à l'utilisateur de dessiner l'arbre binaire de Huffman.
     """
-    #prints the binary tree
-    def drawTree(self):
+    def draw_tree(self):
         print("Tree : -", self.label)
-        self.getChildren()
-        if not self.getLeftChild() is None:
-            self.left_child.drawTree()
-        if not self.getRightChild() is None:
-            self.right_child.drawTree()
+        self.get_children()
+        if not self.get_left_child() is None:
+            self.left_child.draw_tree()
+        if not self.get_right_child() is None:
+            self.right_child.draw_tree()
