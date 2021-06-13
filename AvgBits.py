@@ -1,3 +1,5 @@
+""" Calcule le nombre moyen de bits de stockage.
+"""
 class AverageStorageBits:
 
     """ Constructeur de la classe AverageStorageBits.
@@ -5,36 +7,31 @@ class AverageStorageBits:
     -   frequencies : fréquences d'apparition
     -   initialFile : fichier initial
     """
-    #constructor
-    def __init__(self, binAlphabet: dict, frequencies: dict, initialFile:str):
-        self.binAlphabet = binAlphabet
+    def __init__(self, bin_alphabet: dict, frequencies: dict, initial_file:str):
+        self.bin_alphabet = bin_alphabet
         self.frequencies = frequencies
-        self.initialFile = initialFile
-    
+        self.initial_file = initial_file
+
     """ Retourne l'alphabet binaire.
     """
-    #returns the binary alphabet
-    def getBinAlphabet(self):
-        return self.binAlphabet
+    def get_bin_alphabet(self):
+        return self.bin_alphabet
 
     """ Retourne les fréquences d'apparition.
     """
-    #returns the text frequencies
-    def getFrequencies(self):
+    def get_frequencies(self):
         return self.frequencies
 
     """ Retourne le fichier initial.
     """
-    #returns the initial file
-    def getInitialFile(self):
-        return self.initialFile
+    def get_initial_file(self):
+        return self.initial_file
 
     """ Retourne le nombre moyen de bits de stockage.
     """
-    #returns the average number of storage bits
-    def calculateAvgStorage(self):
+    def calculate_avg_storage(self):
         total = 0
-        binTree = self.getBinAlphabet()
-        for caracter in binTree.values():
+        bin_tree = self.get_bin_alphabet()
+        for caracter in bin_tree.values():
             total += len(caracter)
-        return (total/len(binTree))
+        return total/len(bin_tree)
