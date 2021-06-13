@@ -4,14 +4,11 @@
 """ Import des modules externes et internes au projet.
 -   Module os : permet d'utiliser les fonctionnalités du système d'exploitation.
 """
-
-#class imports
 import os
 from FileProcessor import FileProcess
 from BinaryProcessor import BinaryProcess
 from Tree import HTree
-#from AvgBits import AverageStorageBits
-#from CompressionRate import CompressionRate
+
 
 """ La classe Encoding gère l'appel aux différentes méthodes pour le codage.
 """
@@ -19,94 +16,94 @@ class Encoding:
 
     """ Création d'une instance de la classe FileProcess.
     """
-    fileProcessing = FileProcess()
+    file_processing = FileProcess()
 
     """ Création de variables:
-    -   fileName : utilise input pour permettre à l'utilisateur de rentrer le nom de son fichier
-    -   alphabetAndFrequency : alphabet et fréquence du fichier
-    -   frequenciesList : liste des fréquences
-    -   alphabetList : liste contenant l'alphabet
-    -   alphabetFreqDic : dictionnaire avec l'alphabet et les fréquences
+    -   file_name : utilise input pour permettre à l'utilisateur de rentrer le nom de son fichier
+    -   alphabet_and_frequency : alphabet et fréquence du fichier
+    -   frequencies_list : liste des fréquences
+    -   alphabet_list : liste contenant l'alphabet
+    -   alphabet_freq_dic : dictionnaire avec l'alphabet et les fréquences
     -   freqThenASCIIDic : dictionnaire trié par fréquence et ASCII
-    -   alphabetSize : taille de l'alphabet
+    -   alphabet_size : taille de l'alphabet
     """
-    fileName = input('Please enter your file name : \n')
-    alphabetAndFrequency = fileProcessing.getAlphabetandFreq(fileName)
-    frequenciesList = alphabetAndFrequency[1]
-    alphabetList = alphabetAndFrequency[0]
-    alphabet = alphabetList
-    alphabetFreqDic = fileProcessing.dictionary(frequenciesList, alphabetList)
-    freqASCIIdic = fileProcessing.freqThenASCII_sort(alphabetFreqDic)
-    alphabetSize = len(alphabetList)
-    frequenciesList = []
-    alphabetList = []
+    file_name = input('Please enter your file name : \n')
+    alphabet_and_frequency = file_processing.get_alpha_and_freq(file_name)
+    frequencies_list = alphabet_and_frequency[1]
+    alphabet_list = alphabet_and_frequency[0]
+    alphabet = alphabet_list
+    alphabet_freq_dic = file_processing.dictionary(frequencies_list, alphabet_list)
+    freq_ascii_dic = file_processing.freq_then_ascii_sort(alphabet_freq_dic)
+    alphabet_size = len(alphabet_list)
+    frequencies_list = []
+    alphabet_list = []
 
     """ Écriture du fichier contenant les fréquences.
     """
-    fileProcessing.writeFreqInFile("\n The alphabet size is :    " + " " + str(alphabetSize), None, fileName)
-    for pair in freqASCIIdic:
-        fileProcessing.writeFreqInFile(pair[0], pair[1], fileName)
-        frequenciesList.append(pair[1])
-        alphabetList.append(pair[0])
+    file_processing.write_freq_in_file("\n The alphabet size is :    " + " " + str(alphabet_size), None, file_name)
+    for pair in freq_ascii_dic:
+        file_processing.write_freq_in_file(pair[0], pair[1], file_name)
+        frequencies_list.append(pair[1])
+        alphabet_list.append(pair[0])
 
     """ Gestion de l'arbre de Huffman.
     """
-    treeList = []
-    for i in range(0, len(frequenciesList)):
-        treeList.append(HTree(frequenciesList[i], alphabetList[i]))
+    tree_list = []
+    for i in range(0, len(frequencies_list)):
+        tree_list.append(HTree(frequencies_list[i], alphabet_list[i]))
 
-    while (len(treeList) > 1):
-        m1 = min(treeList)
-        treeList.remove(m1)
-        m2 = min(treeList)
-        treeList.remove(m2)
-        treeList.append(HTree(m1.frequency + m2.frequency, "", m1, m2))
+    while (len(tree_list) > 1):
+        m1 = min(tree_list)
+        tree_list.remove(m1)
+        m2 = min(tree_list)
+        tree_list.remove(m2)
+        tree_list.append(HTree(m1.frequency + m2.frequency, "", m1, m2))
 
-    """ La racine de l'arbre est le premier élément de treeList.
+    """ La racine de l'arbre est le premier élément de tree_list.
     """
-    root = treeList[0]
+    root = tree_list[0]
 
-    binTable = root.browse()
+    bin_table = root.browse()
 
     """ Création d'une instance de la BinaryProcess.
     """
-    binConvert = BinaryProcess()
+    bin_convert = BinaryProcess()
 
     """ Écriture du fichier avec les codes binaires.
     """
-    binConvert.writeBinCodes(alphabet, binTable, fileName)
+    bin_convert.write_bin_codes(alphabet, bin_table, file_name)
 
     """ Accession au contenu du fichier 
     """
-    content = fileProcessing.getFileContent(fileName)
+    content = file_processing.get_file_content(file_name)
 
     """ Processus de traitement binaire.
-    -   binList : liste des codes binaires
+    -   bin_list : liste des codes binaires
     -   Complétion du code binaire
     -   Écriture du fichier binaire
     """
-    binList = binConvert.BinConvert(content, binTable)
-    binConvert.completeBinCode(binList)
-    binListOctet = binConvert.createBinList(binList)
-    binConvert.writeBinFile(fileName[:4] + '_compressed.bin', binListOctet)
+    bin_list = bin_convert.bin_convert(content, bin_table)
+    bin_convert.complete_bin_code(bin_list)
+    bin_list_octet = bin_convert.create_bin_list(bin_list)
+    bin_convert.write_bin_file(file_name[:4] + '_compressed.bin', bin_list_octet)
 
     """ Calcul du taux de compression.
-    -   initialFileSize : taille initiale du fichier
-    -   finalFileSize : taille finale du fichier
-    -   compressionRate : taux de compression = 1 - taille finale/taille initiale
+    -   initial_file_size : taille initiale du fichier
+    -   final_file_size : taille finale du fichier
+    -   compression_rate : taux de compression = 1 - taille finale/taille initiale
     -   path() : méthode d'accession au chemin
     """
-    initialFileSize = (os.path.getsize(fileName[:4] + '_compressed.bin'))
-    finalFileSize = (os.path.getsize(fileName))
-    compressionRate = 1 - (initialFileSize/finalFileSize)
-    print("\n The compression rate for " + fileName + " is " + str(round(compressionRate, 2)*100) + "%")
+    initial_file_size = (os.path.getsize(file_name[:4] + '_compressed.bin'))
+    final_file_size = (os.path.getsize(file_name))
+    compression_rate = 1 - (initial_file_size/final_file_size)
+    print("\n The compression rate for " + file_name + " is " + str(round(compression_rate, 2)*100) + "%")
 
     """ Calcul du nombre moyen de bits de stockage.
     - round() : permet d'arrondir un float
     """
-    Total = 0
-    for i in range(0, len(alphabetList)):
-        Total = Total + len(binTable[alphabetList[i]])*frequenciesList[i]
-    avgBits = round(Total/sum(frequenciesList), 2)
-    print("\n The average number of storage bits for one file caracter " + fileName + " " + " is : " + " " + str(avgBits))
+    total = 0
+    for i in range(0, len(alphabet_list)):
+        total = total + len(bin_table[alphabet_list[i]])*frequencies_list[i]
+    avgBits = round(total/sum(frequencies_list), 2)
+    print("\n The average number of storage bits for one file caracter " + file_name + " " + " is : " + " " + str(avgBits))
 
